@@ -31,15 +31,15 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Torre</label>
-                    <input type="text" class="form-control" name="visitantetorre" id="inputtorre" placeholder="Ej: 2"
-                        required>
+                    <input type="text" class="form-control" name="visitantetorre" id="inputtorre" placeholder="Ej: 2" value="{{torreprop}}"
+                        required readonly>
 
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Apartamento</label>
-                    <input type="text" class="form-control" name="visitanteapartamento" id="inputapartamento"
-                        placeholder="Ej: 302" required>
+                    <input type="text" class="form-control" name="visitanteapartamento" id="inputapartamento" value="{{aparta_prop}}"
+                        placeholder="Ej: 302" required readonly>
 
                 </div>
 
@@ -76,33 +76,6 @@
     <div class="col-md-7">
         <br>
         <h3>Mis Visitantes:</h3>
-        
-        <button class="btn btn-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Listar mis
-            visitantes</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Listar mis visitantes</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/listarvisitantes_propietario" method="POST">
-                            <input type="text" class="form-control" placeholder="Ingrese su cédula"
-                                name="listadocedula">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary">Listar</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <br>
         <br>
         <div class="table-responsive">
             <table class="table table table-striped table-bordered table-sm">

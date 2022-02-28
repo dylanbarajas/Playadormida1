@@ -413,12 +413,16 @@ def listado_asis():
 @app.route('/registrovisitantes')
 def registrovisitantes():
     if 'user' in session:
+        cedula=session['user']
         cursor=mysql.connection.cursor()
-        cursor.execute('SELECT * FROM visitantes')
+        cursor.execute('SELECT * FROM propietarios WHERE cedula=%s',(cedula,))
         data=cursor.fetchall()
-        numero=cursor.execute('SELECT * FROM visitantes')
-        cursor.close()
-        return render_template('propietarios/registrovisitantes.html', conteo=numero, visitantes=data)
+        for i in data:
+            torre=i[6]
+            apartamento=i[7]
+        cursor.execute('SELECT * FROM visitantes WHERE torre=%s and apartamento=%s ORDER BY fecha_ingreso ASC ',(torre,apartamento,))
+        data2=cursor.fetchall()
+        return render_template('propietarios/registrovisitantes.html',mivisitante=data2,torreprop=torre,aparta_prop=apartamento)
     else:
         flash('No ha inciado sesión')
         return redirect(url_for('login')) 
@@ -449,25 +453,6 @@ def agregarvisitantes():
             flash('Visitante registrado exitosamente')
             return redirect(url_for('registrovisitantes'))
 
-#ruta para listar visitantes del propietario
-@app.route('/listarvisitantes_propietario', methods=['POST'])
-def listarpropietario():
-    if request.method=='POST':
-        cedula=request.form['listadocedula']
-        if cedula==session['user']:
-            cursor=mysql.connection.cursor()
-            cursor.execute('SELECT * FROM propietarios WHERE cedula=%s',(cedula,))
-            data=cursor.fetchall()
-            for i in data:
-                torre=i[6]
-                apartamento=i[7]
-            cursor.execute('SELECT * FROM visitantes WHERE torre=%s and apartamento=%s ORDER BY fecha_ingreso ASC ',(torre,apartamento,))
-            data2=cursor.fetchall()
-            print(data2)
-            return render_template('propietarios/registrovisitantes.html',mivisitante=data2)
-        else:
-            flash('Esta no es su cédula')
-            return redirect(url_for('registrovisitantes'))
 
 #ruta editar visitante propietario
 @app.route('/editarvisitante_propietario/<cedula>')
