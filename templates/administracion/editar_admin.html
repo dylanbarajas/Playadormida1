@@ -1,0 +1,66 @@
+{% extends'layoutadministrativo.html' %}
+{% block body %}
+
+<div class="card card-body">
+    <form action="/eliminarvisitante/">
+        <h3>Total de visitantes registrados:</h3>
+        <input class="form-control" type="text" value="{{conteo}}" aria-label="readonly input example" readonly>
+        <br>
+        <div class="table-responsive">
+            <table id="visitantes" class="table table table-striped table-bordered table-sm">
+                <thead>
+
+                    <tr>
+                        <th scope="col">Nombres y apellidos</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Torre</th>
+                        <th scope="col">Apartamento</th>
+                        <th scope="col">Parentesco</th>
+                        <th scope="col">Fecha de ingreso</th>
+                        <th scope="col">Fecha de salida</th>
+                        <th scope="col">Color de manilla</th>
+                        <th scope="col">Valor a pagar</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    {% for i in visitantes %}
+
+                    <tr>
+                        <td> {{ i.0 }}</td>
+                        <td> {{ i.1 }}</td>
+                        <td> {{ i.2 }}</td>
+                        <td> {{ i.3 }}</td>
+                        <td> {{ i.4 }}</td>
+                        <td> {{ i.5 }}</td>
+                        <td> {{ i.6 }}</td>
+                        <td> {{ i.7 }}</td>
+
+                        <td>
+                            <input type="color" class="form-control form-control-color" id="exampleColorInput"
+                                value="{{i.8}}" title="Choose your color" disabled>
+                            <a class="btn btn-info" href="/colordemanilla/{{i.1}}">Editar</a>
+                        </td>
+                        <td>
+                            <label for="">{{i.9}}</label>
+                            <a class="btn btn-info" href="/pago/{{i.1}}">Editar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="/editarvisitante/{{i.1}}">Editar</a>
+
+                            <a class="btn btn-danger btn-delete" href="/eliminarvisitante/{{i.1}}">Eliminar</a>
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

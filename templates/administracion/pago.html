@@ -1,0 +1,94 @@
+{% extends'layoutadministrativo.html' %}
+{% block body %}
+
+<div class="card card-body">
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+        <form action="/actualizarpago/{{visitantes.1}}'" class="registro" method="POST">
+            <h1 style="padding: 20px;">Registro de visitantes:</h1>
+
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="form-label">Nombres y apellidos</label>
+                <input type="text" name="visitantenombre" id="inputnombre" class="form-control" placeholder="Ej: Juan Castro" value="{{visitantes.0}}"
+                    required disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Cédula</label>
+                <input type="text" class="form-control" name="visitantecedula" id="inputcedula"
+                    placeholder="Ej: 123456789" value="{{visitantes.1}}" required disabled>
+
+            </div>
+            
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Email</label>
+                <input type="email" class="form-control" name="visitanteemail" id="inputemail"
+                    placeholder="ejemplo@ejemplo.com" value="{{visitantes.2}}" disabled>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Torre</label>
+                <input type="text" class="form-control" name="visitantetorre" id="inputtorre"
+                    placeholder="Ej: 2" value="{{visitantes.3}}" disabled>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Apartamento</label>
+                <input type="text" class="form-control" name="visitanteapartamento" id="inputapartamento"
+                    placeholder="Ej: 302" value="{{visitantes.4}}" disabled>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Parentesco</label>
+                <input type="text" class="form-control" name="visitanteparentesco" id="inputparentesco" placeholder="Ej: Primo" value="{{visitantes.5}}" disabled>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Fecha de ingreso</label>
+                <input type="date" class="form-control" name="visitanteingreso" id="inputingreso" value="{{visitantes.6}}" disabled>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Fecha de salida</label>
+                <input type="date" class="form-control" name="visitantesalida" id="inputsalida" value="{{visitantes.7}}" disabled>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Color de manilla</label>
+                <input type="text" class="form-control" name="visitantemanilla" id="inputmanilla" value="{{visitantes.8}}" disabled>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="form-label">Valor a pagar</label>
+                <input type="text" class="form-control" name="visitantepagoact" id="inputpagoact" value="{{visitantes.9}}">
+
+            </div>
+
+            <br>
+
+            <div class="centrarbutton">
+                <button type="submit" class="btn btn-success btn-block">
+                    Registrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+{% endblock %}

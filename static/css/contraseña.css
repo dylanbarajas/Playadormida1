@@ -1,0 +1,90 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(../img/playa.jpg) no-repeat center top;
+    background-size: cover;
+    font-family: sans-serif;
+    height: 100vh;
+}
+
+.contraseña-box{
+    width: 320px;
+    height: 470px;
+    background: rgba(255, 255, 255, 0.808);
+    color: #000;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 5%;
+}
+
+.contraseña-box .avatar{
+   width: 100px; 
+   height: 100px;
+   border-radius: 50%;
+   position: absolute;
+   top: -50px;
+   left: calc(50% - 50px);
+
+}
+
+.contraseña-box h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+}
+
+.contraseña-box label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+
+}
+
+.contraseña-box input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contraseña-box input[type="text"],.contraseña-box input[type="password"],.contraseña-box input[type="email"]{
+    border: none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+
+}
+.contraseña-box button{
+    border: none;
+    outline: none;
+    width: 260px;
+    height: 30px;
+    background: #F2AE30;
+    font-size: 18px;
+    border-radius: 20px;
+    color: #000 !important;
+}
+
+.contraseña-box a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: #0c3747;
+}
+
+.contraseña-box a:hover{
+   color: #348ca7;
+}
+
+.contraseña-box button:hover{
+    color: rgb(255, 255, 255) !important;
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+}

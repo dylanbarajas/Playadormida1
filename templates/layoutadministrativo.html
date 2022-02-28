@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/5/lumen/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="icon" href="{{ url_for( 'static', filename='../static/img/favicon.ico')}}" type="image/ico">
+    <script type="text/javascript">
+        window.history.forward();
+        function sinVueltaAtras(){ window.history.forward(); }
+    </script>
+    <title>Playa Dormida 1</title>
+</head>
+
+<body onload="sinVueltaAtras();" onpageshow="if (event.persisted) sinVueltaAtras();" onunload="">
+
+    <header class="" style="text-align: center;">
+        <img src="../static/img/logo3.png" alt="isotipo playa dormida" width="100" height="90" class="">
+        <img src="../static/img/logo2.png" alt="logotipo playa dormida" width="250" height="70" class="">
+    </header>
+    <br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/administracion">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listadovisitantes">Listado de visitantes</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Listas de reserva a zonas comunes
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="" rel="noopener noreferrer">Piscina 1</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Piscina 2</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Playa externa</a>
+                            </li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Playa interna con
+                                    sombra</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Playa interna con
+                                    parasoles</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Baño turco</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Jacuzzi</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Salon de
+                                    eventos</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Terraza BBQ</a>
+                            </li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Gimnasio</a></li>
+                            <li><a class="dropdown-item" href="" target="" rel="noopener noreferrer">Teatrino</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/logout" type="button">Salir</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+    {% block body %}
+    {% endblock %}
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3 footer">
+            <label style="color: black">
+                © 2022 Copyright: Playa Dormida 1 :: Diseño web: Dylan Barajas. Contacto: dylangiusep@gmail.com
+            </label>
+        </div>
+    </footer>
+    <script src="{{url_for('static', filename='js/delete.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

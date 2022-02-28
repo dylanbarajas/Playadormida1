@@ -1,0 +1,64 @@
+{% extends'layoutadministrativo.html' %}
+{% block body %}
+
+<div class="card card-body">
+
+    <h3>Lista de visitantes registrados:</h3>
+    <br>
+    <div class="table-responsive">
+        <table id="visitantes" class="table table table-striped table-bordered table-sm">
+            <thead>
+
+                <tr>
+                    <th scope="col">Nombres y apellidos</th>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Torre</th>
+                    <th scope="col">Apartamento</th>
+                    <th scope="col">Parentesco</th>
+                    <th scope="col">Fecha de ingreso</th>
+                    <th scope="col">Fecha de salida</th>
+                    <th scope="col">Color de manilla</th>
+                    <th scope="col">Valor a pagar</th>
+                </tr>
+            </thead>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script type="text/javascript" charset="utf8"
+                src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+            <script type="text/javascript">
+                $(function () {
+                    $.ajax({
+                        url: '/datos',
+                        type: "GET",
+                        success: function (response) {
+                            console.log('ESTA ES LA RESPUESTA ->', response)
+                            $('#visitantes').DataTable({
+                                pageLenght: 10,
+                                "data": response["datos"],
+                                "columns": [
+                                    { "data": "nombres" },
+                                    { "data": "cedula" },
+                                    { "data": "email" },
+                                    { "data": "torre" },
+                                    { "data": "apartamento" },
+                                    { "data": "parentesco" },
+                                    { "data": "fecha_ingreso" },
+                                    { "data": "fecha_salida" },
+                                    { "data": "color_manilla" },
+                                    { "data": "pago" },
+
+                                ]
+                            })
+                        }
+                    })
+                })
+            </script>
+        </table>
+        <a href="/descargar_reporte" class="btn btn-info">Descargar listado</a>
+        <a href="/editar_admin" class="btn btn-warning">Editar visitantes</a>
+    </div>
+</div>
+
+{% endblock %}
