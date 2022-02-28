@@ -11,8 +11,8 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1" class="form-label">Nombres y apellidos</label>
-                    <input type="text" name="visitantenombre" id="inputnombre" class="form-control" placeholder="Ej: Juan Castro"
-                        required>
+                    <input type="text" name="visitantenombre" id="inputnombre" class="form-control"
+                        placeholder="Ej: Juan Castro" required>
                 </div>
 
                 <div class="form-group">
@@ -21,7 +21,7 @@
                         placeholder="Ej: 123456789" required>
 
                 </div>
-                
+
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Email</label>
                     <input type="email" class="form-control" name="visitanteemail" id="inputemail"
@@ -31,8 +31,8 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Torre</label>
-                    <input type="text" class="form-control" name="visitantetorre" id="inputtorre"
-                        placeholder="Ej: 2" required>
+                    <input type="text" class="form-control" name="visitantetorre" id="inputtorre" placeholder="Ej: 2"
+                        required>
 
                 </div>
 
@@ -45,12 +45,13 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Parentesco</label>
-                    <input type="text" class="form-control" name="visitanteparentesco" id="inputparentesco" placeholder="Ej: Primo" required>
+                    <input type="text" class="form-control" name="visitanteparentesco" id="inputparentesco"
+                        placeholder="Ej: Primo" required>
 
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1" class="form-label">Fecha de ingreso</label>
-                    <input type="date" class="form-control" name="visitanteingreso" id="inputingreso"  required>
+                    <input type="date" class="form-control" name="visitanteingreso" id="inputingreso" required>
 
                 </div>
                 <div class="form-group">
@@ -64,17 +65,44 @@
                     <button type="submit" class="btn btn-success btn-block">
                         Registrar
                     </button>
-                    <a href="" class="btn btn-info">Listar mis visitantes</a>
                 </div>
-                
+
 
             </form>
+            <br>
+
         </div>
     </div>
     <div class="col-md-7">
         <br>
+        <h3>Mis Visitantes:</h3>
+        
+        <button class="btn btn-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">Listar mis
+            visitantes</button>
 
-        <h3>Mis Visitantes</h3>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Listar mis visitantes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/listarvisitantes_propietario" method="POST">
+                            <input type="text" class="form-control" placeholder="Ingrese su cédula"
+                                name="listadocedula">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Listar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
         <br>
         <div class="table-responsive">
             <table class="table table table-striped table-bordered table-sm">
@@ -87,13 +115,18 @@
                         <th scope="col">Torre</th>
                         <th scope="col">Apartamento</th>
                         <th scope="col">Parentesco</th>
+                        <th scope="col">Fecha de ingreso</th>
+                        <th scope="col">Fecha de salida</th>
+                        <th scope="col">Color de manilla</th>
+                        <th scope="col">Valor a pagar</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in personas %}
+                    {% for i in mivisitante %}
 
                     <tr>
+                        <td> {{ i.0 }}</td>
                         <td> {{ i.1 }}</td>
                         <td> {{ i.2 }}</td>
                         <td> {{ i.3 }}</td>
@@ -101,15 +134,16 @@
                         <td> {{ i.5 }}</td>
                         <td> {{ i.6 }}</td>
                         <td> {{ i.7 }}</td>
-                        <td> {{ i.8 }}</td>
+                        <td> <input type="color" class="form-control form-control-color" id="exampleColorInput"
+                            value="{{i.8}}" title="Choose your color" disabled></td>
                         <td> {{ i.9 }}</td>
-                        <td> {{ i.10 }}</td>
+
 
 
                         <td>
-                            <a class="btn btn-secondary" href="/editarpersona/{{i.0}}">Editar</a>
+                            <a class="btn btn-info" href="/editarvisitante_propietario/{{i.1}}">Editar</a>
 
-                            <a class="btn btn-danger" href="/eliminar/{{i.0}}">Eliminar</a>
+                            <a class="btn btn-danger btn-delete" href="/eliminarvisitante/{{i.1}}">Eliminar</a>
 
                         </td>
                     </tr>
@@ -124,8 +158,8 @@
 </div>
 <br>
 <script>
-inputingreso.min = new Date().toISOString().split("T")[0];
-inputsalida.min = new Date().toISOString().split("T")[0];
+    inputingreso.min = new Date().toISOString().split("T")[0];
+    inputsalida.min = new Date().toISOString().split("T")[0];
 
 </script>
 {% endblock %}

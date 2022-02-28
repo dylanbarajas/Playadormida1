@@ -299,7 +299,7 @@ def actualizarmanilla(cedula2):
             mysql.connection.commit()
             flash('Color de manilla registrado exitosamente')
             return redirect(url_for('editar_admin'))
-        elif color=='ninguna' or color=='#FF0000':
+        elif color=='ninguna' or color=='#FFFFFF':
             colormanilla='#FFFFFF'
             cursor.execute("""UPDATE visitantes SET color_manilla=%s WHERE cedula=%s""",(colormanilla,cedula2))
             mysql.connection.commit()
@@ -370,6 +370,7 @@ def actualizarvisitante(cedula2):
         flash('Visitante actualizado exitosamente')
         return redirect(url_for('editar_admin'))
 
+
 #ruta eliminar visitante
 @app.route('/eliminarvisitante/<string:cedula>')
 def eliminarvisitante(cedula):
@@ -379,6 +380,12 @@ def eliminarvisitante(cedula):
         mysql.connection.commit()
         flash('Visitante eliminado exitosamente')
         return redirect(url_for('editar_admin'))
+    elif 'user' in session:
+        cursor=mysql.connection.cursor()
+        cursor.execute('DELETE FROM visitantes WHERE cedula={0}'.format(cedula))
+        mysql.connection.commit()
+        flash('Visitante eliminado exitosamente')
+        return redirect(url_for('registrovisitantes'))
     else:
         flash('No ha iniciado sesión')
         return redirect(url_for('login'))
@@ -441,6 +448,58 @@ def agregarvisitantes():
             mysql.connection.commit()
             flash('Visitante registrado exitosamente')
             return redirect(url_for('registrovisitantes'))
+
+#ruta para listar visitantes del propietario
+@app.route('/listarvisitantes_propietario', methods=['POST'])
+def listarpropietario():
+    if request.method=='POST':
+        cedula=request.form['listadocedula']
+        if cedula==session['user']:
+            cursor=mysql.connection.cursor()
+            cursor.execute('SELECT * FROM propietarios WHERE cedula=%s',(cedula,))
+            data=cursor.fetchall()
+            for i in data:
+                torre=i[6]
+                apartamento=i[7]
+            cursor.execute('SELECT * FROM visitantes WHERE torre=%s and apartamento=%s ORDER BY fecha_ingreso ASC ',(torre,apartamento,))
+            data2=cursor.fetchall()
+            print(data2)
+            return render_template('propietarios/registrovisitantes.html',mivisitante=data2)
+        else:
+            flash('Esta no es su cédula')
+            return redirect(url_for('registrovisitantes'))
+
+#ruta editar visitante propietario
+@app.route('/editarvisitante_propietario/<cedula>')
+def editarvisitante_propietario(cedula):
+    if 'user' in session:
+        cursor=mysql.connection.cursor()
+        cursor.execute('SELECT * FROM visitantes WHERE cedula={0}'.format(cedula))
+        data=cursor.fetchall()
+        return render_template('propietarios/editarvisitante_propietario.html',visitantes=data[0])
+    else:
+        flash('No ha iniciado sesión')
+        return redirect(url_for('login'))
+
+#ruta actualizar visitante propietario
+@app.route('/actualizarvisitante_propietario/<cedula2>', methods=['POST'])
+def actualizarvisitante_propietario(cedula2):
+    if request.method=='POST':
+        nombre=request.form['visitantenombreact']
+        cedula=request.form['visitantecedulaact']
+        email=request.form['visitanteemailact']
+        torre=request.form['visitantetorreact']
+        apartamento=request.form['visitanteapartamentoact']
+        parentesco=request.form['visitanteparentescoact']
+        fechaingreso=request.form['visitanteingresoact']
+        fechasalida=request.form['visitantesalidaact']
+        cursor=mysql.connection.cursor()
+        cursor.execute("""UPDATE visitantes SET nombres=%s,cedula=%s,email=%s,torre=%s,apartamento=%s, parentesco=%s,fecha_ingreso=%s,fecha_salida=%s WHERE cedula=%s""",(nombre,cedula,email,torre,apartamento,parentesco,fechaingreso,fechasalida,cedula2))
+        mysql.connection.commit()
+        cedula=session['user']
+        flash('Visitante actualizado exitosamente')
+        return redirect(url_for('registrovisitantes'))
+
 
 #ruta dashboard recepcion
 @app.route('/recepcion')
