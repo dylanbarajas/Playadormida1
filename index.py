@@ -4,10 +4,7 @@ import hashlib
 import pandas as pd
 import mysql.connector
 
-conexion1=mysql.connector.connect(host="localhost", 
-                                  user="root", 
-                                  passwd="ing.dylan1", 
-                                  database="playadormida")
+
 
 """cursor1=conexion1.cursor()
 code='playadormida1379'
@@ -30,8 +27,12 @@ app.config['MYSQL_USER']='root'
 app.config['MYSQL_PASSWORD']='ing.dylan1'
 app.config['MYSQL_DB']='playadormida'
 
-mysql=MySQL(app)
+conexion1=mysql.connector.connect(host="localhost", 
+                                  user="root", 
+                                  passwd="ing.dylan1", 
+                                  database="playadormida")
 
+mysql=MySQL(app)
 
 
 
